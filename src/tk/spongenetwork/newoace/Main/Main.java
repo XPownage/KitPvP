@@ -1,23 +1,20 @@
-package tk.spongenetwork.newoace.main;
+package tk.spongenetwork.newoace.Main;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import tk.spongenetwork.newoace.commands.Rank;
 import tk.spongenetwork.newoace.commands.SetArmorLevel;
 import tk.spongenetwork.newoace.commands.SetLevel;
 import tk.spongenetwork.newoace.events.ArmorBlock;
-import tk.spongenetwork.newoace.events.ArmorEquipEvent;
 import tk.spongenetwork.newoace.events.CheckItem;
 import tk.spongenetwork.newoace.events.LevelUp;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Main extends JavaPlugin implements Listener {
     File playerLevelYml = new File(this.getDataFolder()+"/PlayerLevel.yml");
