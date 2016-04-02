@@ -40,6 +40,7 @@ public class Main extends JavaPlugin implements Listener {
         saveCustomYml(playerArmorExpConfig, playerArmorExpYml);
         saveCustomYml(playerMoneyConfig, playerMoneyYml);
         this.getCommand("rank").setExecutor(new Rank());
+        this.getCommand("money").setExecutor(new Rank());
         this.getCommand("setswordlevel").setExecutor(new SetLevel());
         this.getCommand("setarmorlevel").setExecutor(new SetArmorLevel());
     }
