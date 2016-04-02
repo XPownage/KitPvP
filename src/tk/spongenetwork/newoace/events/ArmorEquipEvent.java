@@ -42,8 +42,24 @@ public class ArmorEquipEvent implements Listener {
         diamond.add(Material.DIAMOND_CHESTPLATE);
         diamond.add(Material.DIAMOND_HELMET);
         diamond.add(Material.DIAMOND_LEGGINGS);
+        diamond.add(Material.DIAMOND_BOOTS);
+        iron.add(Material.IRON_HELMET);
+        iron.add(Material.IRON_CHESTPLATE);
+        iron.add(Material.IRON_LEGGINGS);
+        iron.add(Material.IRON_BOOTS);
+        gold.add(Material.GOLD_HELMET);
+        gold.add(Material.GOLD_CHESTPLATE);
+        gold.add(Material.GOLD_LEGGINGS);
+        gold.add(Material.GOLD_BOOTS);
+        chain.add(Material.CHAINMAIL_HELMET);
+        chain.add(Material.CHAINMAIL_CHESTPLATE);
+        chain.add(Material.CHAINMAIL_LEGGINGS);
+        chain.add(Material.CHAINMAIL_BOOTS);
         for (Material i : blackList) {
             if (event.getCurrentItem().getType().equals(i)) {
+                if (!(playerArmorLevelConfig.getInt(player.getName()) >= 50)) {
+
+                }
             }
         }
     }
