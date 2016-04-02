@@ -23,7 +23,7 @@ public class LevelUp implements Listener {
         Integer level = playerLevelConfig.getInt(e.getEntity().getKiller().getName());
         double expNextLevel = 0 ;
         for (int i = 0 ; i <= level ; i++) {
-            expNextLevel = 1.5 * 250;
+            expNextLevel = 1.6 * 250;
         }
         exp += 50;
         if (!(level >= 50)) {
