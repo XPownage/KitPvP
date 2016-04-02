@@ -41,6 +41,7 @@ public class ArmorEquipEvent implements Listener {
         blackList.add(Material.CHAINMAIL_LEGGINGS) ;
         diamond.add(Material.DIAMOND_CHESTPLATE);
         diamond.add(Material.DIAMOND_HELMET);
+        diamond.add(Material.DIAMOND_LEGGINGS);
         for (Material i : blackList) {
             if (event.getCurrentItem().getType().equals(i)) {
             }
