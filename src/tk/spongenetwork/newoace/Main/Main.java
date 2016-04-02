@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import tk.spongenetwork.newoace.commands.Money;
 import tk.spongenetwork.newoace.commands.Rank;
 import tk.spongenetwork.newoace.commands.SetArmorLevel;
 import tk.spongenetwork.newoace.commands.SetLevel;
@@ -40,7 +41,7 @@ public class Main extends JavaPlugin implements Listener {
         saveCustomYml(playerArmorExpConfig, playerArmorExpYml);
         saveCustomYml(playerMoneyConfig, playerMoneyYml);
         this.getCommand("rank").setExecutor(new Rank());
-        this.getCommand("money").setExecutor(new Rank());
+        this.getCommand("money").setExecutor(new Money());
         this.getCommand("setswordlevel").setExecutor(new SetLevel());
         this.getCommand("setarmorlevel").setExecutor(new SetArmorLevel());
     }
