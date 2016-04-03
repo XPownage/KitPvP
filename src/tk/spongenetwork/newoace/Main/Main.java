@@ -11,6 +11,7 @@ import tk.spongenetwork.newoace.commands.Rank;
 import tk.spongenetwork.newoace.commands.SetArmorLevel;
 import tk.spongenetwork.newoace.commands.SetLevel;
 import tk.spongenetwork.newoace.events.ArmorBlock;
+import tk.spongenetwork.newoace.events.ArmorEquipEvent;
 import tk.spongenetwork.newoace.events.CheckItem;
 import tk.spongenetwork.newoace.events.LevelUp;
 
@@ -31,6 +32,7 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         saveDefaultConfig();
         getConfig().options().copyDefaults();
+        getServer().getPluginManager().registerEvents(new ArmorEquipEvent(), this);
         getServer().getPluginManager().registerEvents(new ArmorBlock(), this);
         getServer().getPluginManager().registerEvents(new LevelUp(), this);
         getServer().getPluginManager().registerEvents(new CheckItem(), this);

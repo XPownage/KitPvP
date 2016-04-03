@@ -4,9 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,29 +17,12 @@ public class ArmorEquipEvent implements Listener {
     File playerArmorLevelYml = new File(
             Bukkit.getPluginManager().getPlugin("test").getDataFolder() + "/PlayerArmorLevel.yml");
     FileConfiguration playerArmorLevelConfig = YamlConfiguration.loadConfiguration(playerArmorLevelYml);
-    public void onArmorEquip (InventoryClickEvent event) {
-        Player player = (Player) event.getWhoClicked() ;
-        List<Material> blackList = new ArrayList<>() ;
-        List<Material> diamond = new ArrayList<>() ;
-        List<Material> iron = new ArrayList<>() ;
-        List<Material> gold = new ArrayList<>() ;
-        List<Material> chain = new ArrayList<>() ;
-        blackList.add(Material.DIAMOND_CHESTPLATE) ;
-        blackList.add(Material.DIAMOND_HELMET  ) ;
-        blackList.add(Material.DIAMOND_LEGGINGS) ;
-        blackList.add(Material.DIAMOND_BOOTS) ;
-        blackList.add(Material.IRON_HELMET) ;
-        blackList.add(Material.IRON_CHESTPLATE) ;
-        blackList.add(Material.IRON_LEGGINGS) ;
-        blackList.add(Material.IRON_BOOTS) ;
-        blackList.add(Material.GOLD_HELMET) ;
-        blackList.add(Material.GOLD_CHESTPLATE) ;
-        blackList.add(Material.GOLD_LEGGINGS) ;
-        blackList.add(Material.GOLD_BOOTS) ;
-        blackList.add(Material.CHAINMAIL_BOOTS) ;
-        blackList.add(Material.CHAINMAIL_CHESTPLATE) ;
-        blackList.add(Material.CHAINMAIL_HELMET) ;
-        blackList.add(Material.CHAINMAIL_LEGGINGS) ;
+    List<Material> diamond = new ArrayList<>();
+    List<Material> iron = new ArrayList<>();
+    List<Material> gold = new ArrayList<>();
+    List<Material> chain = new ArrayList<>();
+
+    public void onInventoryClick(InventoryClickEvent event) {
         diamond.add(Material.DIAMOND_CHESTPLATE);
         diamond.add(Material.DIAMOND_HELMET);
         diamond.add(Material.DIAMOND_LEGGINGS);
@@ -55,12 +39,16 @@ public class ArmorEquipEvent implements Listener {
         chain.add(Material.CHAINMAIL_CHESTPLATE);
         chain.add(Material.CHAINMAIL_LEGGINGS);
         chain.add(Material.CHAINMAIL_BOOTS);
-        for (Material i : blackList) {
-            if (event.getCurrentItem().getType().equals(i)) {
-                if (!(playerArmorLevelConfig.getInt(player.getName()) >= 50)) {
-
+        if (event.getSlotType().equals(InventoryType.SlotType.ARMOR)) {
+            for (Material i : diamond) {
+                if (!(playerArmorLevelConfig.getInt(event.getWhoClicked().getName()) >= 50) && event.getCurrentItem().getType().equals(i)) {
+                    ItemStack item = event.getCurrentItem();
+                    event.getCurrentItem().setAmount(0);
+                    int firstEmpty = event.getWhoClicked().getInventory().firstEmpty();
+                    event.getWhoClicked().getInventory().setItem(firstEmpty, item);
                 }
             }
         }
     }
+
 }
