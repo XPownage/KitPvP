@@ -6,12 +6,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ArmorEquipEvent implements Listener {
     File playerArmorLevelYml = new File(
@@ -21,8 +21,10 @@ public class ArmorEquipEvent implements Listener {
     List<Material> iron = new ArrayList<>();
     List<Material> gold = new ArrayList<>();
     List<Material> chain = new ArrayList<>();
+    ItemStack[] armor = new ItemStack[0];
 
     public void onInventoryClick(InventoryClickEvent event) {
+        Bukkit.broadcastMessage("event");
         diamond.add(Material.DIAMOND_CHESTPLATE);
         diamond.add(Material.DIAMOND_HELMET);
         diamond.add(Material.DIAMOND_LEGGINGS);
@@ -39,9 +41,10 @@ public class ArmorEquipEvent implements Listener {
         chain.add(Material.CHAINMAIL_CHESTPLATE);
         chain.add(Material.CHAINMAIL_LEGGINGS);
         chain.add(Material.CHAINMAIL_BOOTS);
-        if (event.getSlotType().equals(InventoryType.SlotType.ARMOR)) {
-            for (Material i : diamond) {
-                if (!(playerArmorLevelConfig.getInt(event.getWhoClicked().getName()) >= 50) && event.getCurrentItem().getType().equals(i)) {
+        armor = event.getWhoClicked().getInventory().getArmorContents();
+        for (int i = 0; i > armor.length; i++) {
+            for (Material j : diamond) {
+                if (!(playerArmorLevelConfig.getInt(event.getWhoClicked().getName()) >= 50) && (armor[i].getType() == j)) {
                     ItemStack item = event.getCurrentItem();
                     event.getCurrentItem().setAmount(0);
                     int firstEmpty = event.getWhoClicked().getInventory().firstEmpty();
