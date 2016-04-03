@@ -10,9 +10,6 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 
-/**
- * Created by Newoace on 4/2/2016.
- */
 public class Money implements CommandExecutor {
     File playerMoneyYml = new File(Bukkit.getPluginManager().getPlugin("test").getDataFolder() + "/PlayerMoney.yml");
     FileConfiguration playerMoneyConfig = YamlConfiguration.loadConfiguration(playerMoneyYml);

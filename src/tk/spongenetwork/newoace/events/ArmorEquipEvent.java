@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -23,6 +24,7 @@ public class ArmorEquipEvent implements Listener {
     List<Material> chain = new ArrayList<>();
     ItemStack[] armor = new ItemStack[0];
 
+    @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Bukkit.broadcastMessage("event");
         diamond.add(Material.DIAMOND_CHESTPLATE);
@@ -41,6 +43,8 @@ public class ArmorEquipEvent implements Listener {
         chain.add(Material.CHAINMAIL_CHESTPLATE);
         chain.add(Material.CHAINMAIL_LEGGINGS);
         chain.add(Material.CHAINMAIL_BOOTS);
+
+
         armor = event.getWhoClicked().getInventory().getArmorContents();
         for (int i = 0; i > armor.length; i++) {
             for (Material j : diamond) {
