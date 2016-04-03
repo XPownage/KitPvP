@@ -1,0 +1,16 @@
+name: test
+main: tk.spongenetwork.newoace.Main.Main
+version: 0.1.1
+commands:
+  rank:
+    description: Tells you your rank
+    usage: /rank
+  setswordlevel:
+    description: Sets your sword level
+    usage: /setswordlevel
+  setarmorlevel:
+    description: Sets your armor level
+    usage: /setarmorlevel
+  money:
+     description: Checks your money balance
+     usage: /money

@@ -20,7 +20,8 @@ public class Money implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
-            sender.sendMessage(playerMoneyConfig.getString(sender.getName()));
+            sender.sendMessage(("Balance:") + playerMoneyConfig.getString(sender.getName()));
+            return true;
         }
         return false;
     }
