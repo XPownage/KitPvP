@@ -59,7 +59,7 @@ public class ArmorEquipEvent implements Listener {
                     }
                 } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) <= 5) {
                     if ((event.getCurrentItem().getType() == chain.get(i))) {
-                        event.setCancelled(true);
+                        event.setCancelled(true);//I got it to work
                     }
                 }
             }
