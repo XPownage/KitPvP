@@ -22,11 +22,11 @@ public class ArmorEquipEvent implements Listener {
     List<Material> iron = new ArrayList<>();
     List<Material> gold = new ArrayList<>();
     List<Material> chain = new ArrayList<>();
-    ItemStack[] armor = new ItemStack[0];
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Bukkit.broadcastMessage("event");
+        ItemStack[] armor = event.getWhoClicked().getInventory().getArmorContents();
         diamond.add(Material.DIAMOND_CHESTPLATE);
         diamond.add(Material.DIAMOND_HELMET);
         diamond.add(Material.DIAMOND_LEGGINGS);
@@ -43,19 +43,27 @@ public class ArmorEquipEvent implements Listener {
         chain.add(Material.CHAINMAIL_CHESTPLATE);
         chain.add(Material.CHAINMAIL_LEGGINGS);
         chain.add(Material.CHAINMAIL_BOOTS);
-
-
-        armor = event.getWhoClicked().getInventory().getArmorContents();
-        for (int i = 0; i > armor.length; i++) {
-            for (Material j : diamond) {
-                if (!(playerArmorLevelConfig.getInt(event.getWhoClicked().getName()) >= 50) && (armor[i].getType() == j)) {
-                    ItemStack item = event.getCurrentItem();
-                    event.getCurrentItem().setAmount(0);
-                    int firstEmpty = event.getWhoClicked().getInventory().firstEmpty();
-                    event.getWhoClicked().getInventory().setItem(firstEmpty, item);
+        for (int i = 0; i <= 4; i++) {
+            if (event.getCurrentItem() != null) {
+                if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName()) <= 50)) {
+                    if ((event.getCurrentItem().getType() == diamond.get(i))) {
+                        event.setCancelled(true);
+                    }
+                } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) <= 25) {
+                    if ((event.getCurrentItem().getType() == iron.get(i))) {
+                        event.setCancelled(true);
+                    }
+                } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) <= 10) {
+                    if ((event.getCurrentItem().getType() == chain.get(i))) {
+                        event.setCancelled(true);
+                    }
+                } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) <= 5) {
+                    if ((event.getCurrentItem().getType() == chain.get(i))) {
+                        event.setCancelled(true);
+                    }
                 }
             }
         }
-    }
 
+    }
 }
