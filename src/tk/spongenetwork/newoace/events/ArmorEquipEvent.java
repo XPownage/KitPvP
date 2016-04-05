@@ -27,8 +27,8 @@ public class ArmorEquipEvent implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.isCancelled()) return;
         playerArmorLevelConfig = YamlConfiguration.loadConfiguration(playerArmorLevelYml);
-        Bukkit.broadcastMessage("event");
         ItemStack[] armor = event.getWhoClicked().getInventory().getArmorContents();
+        int size = event.getWhoClicked().getInventory().getSize();
         diamond.add(Material.DIAMOND_CHESTPLATE);
         diamond.add(Material.DIAMOND_HELMET);
         diamond.add(Material.DIAMOND_LEGGINGS);
@@ -45,23 +45,31 @@ public class ArmorEquipEvent implements Listener {
         chain.add(Material.CHAINMAIL_CHESTPLATE);
         chain.add(Material.CHAINMAIL_LEGGINGS);
         chain.add(Material.CHAINMAIL_BOOTS);
-        for (int i = 0; i <= 3; i++) {
-            if (event.getCurrentItem() != null) {
-                if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName()) <= 50)) {
-                    if ((event.getCurrentItem().getType() == diamond.get(i))) {
-                        event.setCancelled(true);
+        if (event.isShiftClick() || event.isLeftClick() || event.isRightClick()) {
+            for (int i = 0; i <= 3; i++) {
+                if (event.getCurrentItem() != null) {
+                    if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName()) < 50)) {
+                        if ((event.getCurrentItem().getType() == diamond.get(i))) {
+                            event.setCancelled(true);
+
+                        }
+                    } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) < 25) {
+                        if ((event.getCurrentItem().getType() == iron.get(i))) {
+                            event.setCancelled(true);
+                        }
+                    } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) < 10) {
+                        if ((event.getCurrentItem().getType() == chain.get(i))) {
+                            event.setCancelled(true);
+                        }
+                    } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) < 5) {
+                        if ((event.getCurrentItem().getType() == gold.get(i))) {
+                            event.setCancelled(true);//I got it to work
+                        }
                     }
-                } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) <= 25) {
-                    if ((event.getCurrentItem().getType() == iron.get(i))) {
-                        event.setCancelled(true);
-                    }
-                } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) <= 10) {
-                    if ((event.getCurrentItem().getType() == chain.get(i))) {
-                        event.setCancelled(true);
-                    }
-                } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) <= 5) {
-                    if ((event.getCurrentItem().getType() == gold.get(i))) {
-                        event.setCancelled(true);//I got it to work
+                    for (int j = 0; j < event.getWhoClicked().getInventory().getSize(); i++) {
+                        if ((event.getCurrentItem()) == event.getWhoClicked().getInventory().getItem(j)) {
+                            event.getWhoClicked().getInventory().getItem(j).setAmount(0);
+                        }
                     }
                 }
             }
