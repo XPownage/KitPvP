@@ -25,6 +25,8 @@ public class ArmorEquipEvent implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
+        if (event.isCancelled()) return;
+        playerArmorLevelConfig = YamlConfiguration.loadConfiguration(playerArmorLevelYml);
         Bukkit.broadcastMessage("event");
         ItemStack[] armor = event.getWhoClicked().getInventory().getArmorContents();
         diamond.add(Material.DIAMOND_CHESTPLATE);
@@ -43,7 +45,7 @@ public class ArmorEquipEvent implements Listener {
         chain.add(Material.CHAINMAIL_CHESTPLATE);
         chain.add(Material.CHAINMAIL_LEGGINGS);
         chain.add(Material.CHAINMAIL_BOOTS);
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 0; i <= 3; i++) {
             if (event.getCurrentItem() != null) {
                 if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName()) <= 50)) {
                     if ((event.getCurrentItem().getType() == diamond.get(i))) {
@@ -58,7 +60,7 @@ public class ArmorEquipEvent implements Listener {
                         event.setCancelled(true);
                     }
                 } else if ((playerArmorLevelConfig.getInt(event.getWhoClicked().getName())) <= 5) {
-                    if ((event.getCurrentItem().getType() == chain.get(i))) {
+                    if ((event.getCurrentItem().getType() == gold.get(i))) {
                         event.setCancelled(true);//I got it to work
                     }
                 }
