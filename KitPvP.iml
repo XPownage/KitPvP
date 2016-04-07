@@ -10,6 +10,6 @@
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="spigot-1.9" level="application" />
     <orderEntry type="library" name="ArmorEquipEvent" level="application" />
-    <orderEntry type="library" name="spigot_server" level="application" />
+    <orderEntry type="library" name="spigot-1.9.2" level="application" />
   </component>
 </module>
